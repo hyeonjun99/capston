@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Blink Detection</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@3.11.0/dist/tf-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@3.11.0/dist/tf-converter.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@3.11.0/dist/tf-backend-webgl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-cpu@3.11.0/dist/tf-backend-cpu.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-wasm@3.11.0/dist/tf-backend-wasm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@0.0.3/dist/face-landmarks-detection.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scatter-gl@0.0.1/lib/scatter-gl.min.js"></script> <!-- ScatterGL 추가 -->
+    <script src="triangulation.js"></script> <!-- TRIANGULATION 데이터 추가 -->
+    <script src="Stats.js"></script> <!-- Stats.js 추가 -->
+    <style>
+        .canvas-wrapper,
+        #scatter-gl-container {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #scatter-gl-container {
+            border: solid 1px black;
+            position: relative;
+        }
+
+        /* center the canvas within its wrapper */
+        #scatter-gl-container canvas {
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        #alert-message {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div class="container">
+            <div class="canvas-wrapper">
+                <canvas id="output"></canvas>
+                <video id="video" playsinline style="
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            visibility: hidden;
+            width: auto;
+            height: auto;
+            ">
+                </video>
+            </div>
+            <div id="scatter-gl-container"></div>
+        </div>
+        <div id="alert-message">
+            눈을 오랫동안 감고 있습니다!
+        </div>
+    </div>
+    <script src="chap10.js"></script> <!-- chap10.js 파일 포함 -->
+</body>
+</html>
